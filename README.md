@@ -28,6 +28,8 @@ The repository includes **4 core directories**, each mapping to a functional mod
 ### 4. MultimodalEmotionalDialogueData
 * **Corresponds to:** The **Multimodal Emotional Dialogue Dataset** of the paper.
 * **Content:** The `.jsonl` files used when training the model.
+Data samples here.
+We will open-source the dataset in huggingface soon.
 
 ---
 

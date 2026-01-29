@@ -10,21 +10,10 @@ import re
 import json
 import openai
 
-# ak = "70cddabd-6b37-421b-97e1-ee3dd7aef97b"
-# base_url="https://ark-cn-beijing.bytedance.net/api/v3",
-# model_name="ep-20250305213208-wpdln",
 
-base_url = "https://search.bytedance.net/gpt/openapi/online/v2/crawl"
-api_version = "2024-03-01-preview"
-ak = "kiL9hPd4Pi8Djjk6oGEnFUOhQERijFEi"
-# model_name = "gpt-4o-audio-preview"
-model_name = "gpt-4o-2024-08-06"
-max_tokens = 1000  # range: [${max_tokens_min}, ${max_tokens_max}]
-
-
-base_url = "https://search.bytedance.net/gpt/openapi/online/v2/crawl"
-api_version = "2024-03-01-preview"
-ak = "j71HfPn59FrU8DaAeUav1Q8OaE1Z5MZa"
+base_url = 
+api_version = 
+ak = 
 model_name = "gemini-2.5-pro-preview-06-05"
 max_tokens = 8192
 
@@ -232,7 +221,6 @@ def analyze_jsonl_entry(entry, client, gt_dict_map_video_item):
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="批量处理JSONL并多线程可视化")
-    # parser.add_argument("--jsonl", type=str, default="/mnt/bn/twj-data-multimodal/20250806-135830.jsonl", help="输入的jsonl文件路径")
     parser.add_argument("--jsonl", default='', help="输入的jsonl文件或目录路径(支持一个或多个)")
     parser.add_argument("--max-workers", type=int, default=32, help="最大线程数")
     args = parser.parse_args()
@@ -240,26 +228,10 @@ def main():
 
 # 支持dir，也支持单个file
     args.jsonl = [
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/jsonloutput/MELD_test----0112-7B-multitask-pretrained_stage1-50k_all--checkpoint-3500--llasa_3b_instruct----with_instruction.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/jsonloutput/MELD_test----0112-7B-multitask-pretrained_stage1-no_fakedata--checkpoint-3000----llasa_3b_instruct----with_instruction.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/jsonloutput/MELD_test----0112-7B-only_stage2-50k_all-wo_emotion_ana--checkpoint-3500----llasa_3b_instruct----with_instruction.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/jsonloutput/MELD_test----0112-7B-only_stage2-all--checkpoint-3000----llasa_3b_instruct----with_instruction.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/jsonloutput/MELD_test----0112-7B-multitask-pretrained_stage1-all--checkpoint-5000----llasa_3b_instruct----with_instruction.jsonl"
 
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/jsonloutput/CH_SIMSv2_MMLA_test-for_EmoOmni-0112-7B-multitask-pretrained_stage1-50k_all----doubao.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/jsonloutput/CH_SIMSv2_MMLA_test-for_EmoOmni-0112-7B-multitask-pretrained_stage1-50k_all----llasa_3b_instruct.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/jsonloutput/CH_SIMSv2_MMLA_test-for_EmoOmni-0112-7B-multitask-pretrained_stage1-50k_all----llasa_3b_base.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/jsonl_11/doubao_jsonl----no_instruct----CH_SIMSv2_MMLA_test-for_EmoOmni-0112-7B-multitask-pretrained_stage1-50k_all-3500.instuct.jsonl",
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/jsonloutput/MELD_test----0112-7B-multitask-pretrained_stage1-50k_all--checkpoint-3500--llasa_3b_instruct----with_instruction.jsonl"
-   
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/Gemini/MELD-0126-instuct-Speech.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/Gemini/MELD-0126-instuct-Speech-with_doubao_speech.jsonl"
-
-"/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/Gemini/MELD-0126-instuct-Speech-with_doubao_speech.jsonl"
     ] 
 
-    gt_jsonl = "/mnt/bn/twj-data-multimodal2/workspace/swift_training/tools/dialogue_1229/MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference.jsonl"
+    gt_jsonl =
 
     back_fix = '.v0116-Gemini-Instruct_Speech-output_v1.jsonl'
     gt_dict_map_video_item = {}

@@ -10,21 +10,9 @@ import re
 import json
 import openai
 
-# ak = "70cddabd-6b37-421b-97e1-ee3dd7aef97b"
-# base_url="https://ark-cn-beijing.bytedance.net/api/v3",
-# model_name="ep-20250305213208-wpdln",
-
-base_url = "https://search.bytedance.net/gpt/openapi/online/v2/crawl"
-api_version = "2024-03-01-preview"
-ak = "kiL9hPd4Pi8Djjk6oGEnFUOhQERijFEi"
-# model_name = "gpt-4o-audio-preview"
-model_name = "gpt-4o-2024-08-06"
-max_tokens = 1000  # range: [${max_tokens_min}, ${max_tokens_max}]
-
-
-base_url = "https://search.bytedance.net/gpt/openapi/online/v2/crawl"
-api_version = "2024-03-01-preview"
-ak = "j71HfPn59FrU8DaAeUav1Q8OaE1Z5MZa"
+base_url = 
+api_version = 
+ak = 
 model_name = "gemini-2.5-pro-preview-06-05"
 max_tokens = 8192
 
@@ -86,46 +74,6 @@ import pandas as pd
 
 score_keys =  ["Emotion_Analysis", "Response_Emotional_Strategy", "Response_Content"]
 
-def reverse_data_format(input_str):
-    '''
-    string = 输入的音视频识别文本为:{utt1_text}, 情感分析结果为:{utt1_emotion} 意图策略及回复路径:{utt1_strategy} {utt1_gen_path}, 所以我的回复应该是:{utt2_text}
-
-    把这个string转化回去得到五个部分
-    
-    '''
-
-    # 如何更加鲁邦，如果没有则直接设置为none
-    try:
-        if '输入的音视频识别文本为' in input_str:
-            utt1_text = input_str.split("情感分析结果为:")[0].split("输入的音视频识别文本为:")[1].strip()
-        else:
-            utt1_text = 'None'
-        if "情感分析结果为" in input_str:
-            utt1_emotion = input_str.split("意图策略及回复路径")[0].split("情感分析结果为:")[1].strip()
-        else:
-            utt1_emotion = 'None'
-        if '回复策略分析' in input_str:
-            utt1_strategy = input_str.split("因此我的回复路径可以是")[0].split("回复策略分析:")[1].strip()
-        else:
-            utt1_strategy = 'None'
-    
-        utt2_text = input_str.split("所以我的回复应该是:")[1].strip()
-    except Exception as e:
-        return {
-            "question_text": 'None',
-            "emotion": 'None',
-            "strategy": 'None',
-            # "gen_path": utt1_gen_path,
-            "answer_text": 'None',
-        }
-
-    return {
-        "question_text": utt1_text,
-        "emotion": utt1_emotion,
-        "strategy": utt1_strategy,
-        # "gen_path": utt1_gen_path,
-        "answer_text": utt2_text,
-    }
 
 def analyze_jsonl_entry(entry, client, gt_dict_map_video_item):
 
@@ -265,68 +213,6 @@ def main():
 
 # 支持dir，也支持单个file
     args.jsonl = [
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-all/v1-20260113-183540__checkpoint-5000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-50k_all/v0-20260113-164710__checkpoint-3500__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-all_sft-multitask-pretrained_stage1-all/v0-20260112-181321__checkpoint-7500__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-no_fakedata/v4-20260113-020841__checkpoint-3000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-raw-all/v2-20260113-161632__checkpoint-5000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-only_stage2-all/v1-20260113-172559__checkpoint-3000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/baselines/MELD-qwenomni-30B-thinking-only_response.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/baselines/MELD-qwenomni-7B-only_response.jsonl"
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/baselines/MELD-qwenomni-30B-instruct-only_response.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/baselines/emobench-minicpm_o26.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/baselines/MELD-minicpm_o26-only_response.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/baselines/Intern-s1-mini/--Intern-s1-mini--MELD_test--only_response--output.jsonl",
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0116-7B-multitask-pretrained_stage1-50k_all-wo_emotion_ana/v2-20260117-002230__checkpoint-3500__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-wo_emo_ana.jsonl"
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-50k_all/CH_SIMSv2_MMLA_test-for_EmoOmni-0112-7B-multitask-pretrained_stage1-50k_all-3500.jsonl",
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/baselines/MELD-qwenomni-30B-instruct-only_response-0118_new.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/baselines/CH_SIMSv2_MMLA_test-qwenomni-30B-thinking-only_response-for_baselines.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/baselines/CH_SIMSv2_MMLA_test-qwenomni-30B-instruct-only_response-for_baselines.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/baselines/CH_SIMSv2_MMLA_test-qwen25omni7B-only_response-for_baselines.jsonl",
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-50k_all/v0-20260113-164710__checkpoint-7000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-only_stage2-all/v1-20260113-172559__checkpoint-6000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-all/v1-20260113-183540__checkpoint-10000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-raw-all/v2-20260113-161632__checkpoint-10000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-no_fakedata/v4-20260113-020841__checkpoint-6000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-50k_all/v0-20260113-164710__checkpoint-7000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-best-500k_all/v0-20260113-195317__checkpoint-8000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-best-500k_all/v0-20260113-195317__checkpoint-16000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-raw-all/CH_SIMSv2_MMLA_test-for_EmoOmni_0112-7B-multitask-raw-all-5000.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-all_sft-multitask-pretrained_stage1-all/CH_SIMSv2_MMLA_test-for_EmoOmni-0112-7B-all_sft-multitask-pretrained_stage1-all-7500.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-3B-multitask-pretrained_stage1-all/CH_SIMSv2_MMLA_test-for_EmoOmni-0112-3B-multitask-pretrained_stage1-all-5000.jsonl",
-
-
-
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-all/v1-20260113-183540__checkpoint-5000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-50k_all/CH_SIMSv2_MMLA_test-for_EmoOmni-0112-7B-multitask-pretrained_stage1-50k_all-3500.jsonl",
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0120-7B-multitask-pretrained_stage1-singetask/v0-20260120-015725__checkpoint-3000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl"
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-3B-multitask-pretrained_stage1-all/v1-20260113-020519__checkpoint-5000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl"
-    
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/jsonloutput/0112-7B-multitask-pretrained_stage1-50k_all.jsonl",
-    
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-50k_all/v0-20260113-164710__checkpoint-3500__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl"
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-50k_all/v0-20260113-164710__checkpoint-7000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ICML_metrics/talker/jsonloutput/0112-7B-multitask-pretrained_stage1-50k_all.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-all/v1-20260113-183540__checkpoint-5000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0116-7B-multitask-pretrained_stage1-50k_all-wo_emotion_ana/v2-20260117-002230__checkpoint-3500__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-wo_emo_ana.jsonl",
-
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0120-3B-multitask-pretrained_stage1-50k/v0-20260120-131300__checkpoint-3500__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0120-7B-multitask-pretrained_stage1-singetask/v0-20260120-015725__checkpoint-3000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl",
-
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0120-7B-multitask-pretrained_stage1-50k_all-wo_cot/v0-20260120-154810__checkpoint-3500__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl"
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/inference_results/checkpoint-8000/tmp_v0-20260113-195317_checkpoint-8000_CH_SIMSv2_MMLA_test-for_EmoOmni_1769439342_2666/all.jsonl"
-# "/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-best-500k_all/v0-20260113-195317__checkpoint-8000__MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference-v3.jsonl"
 
 '/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-50k_all/CH_SIMSv2_MMLA_test-for_EmoOmni-0112-7B-multitask-pretrained_stage1-50k_all-3500.jsonl'
 
