@@ -36,7 +36,7 @@ The repository includes **4 core directories**, each mapping to a functional mod
 Try the system via the online demo:
 [https://anonymous.4open.science/w/EmoOmni-demopage-F790/](https://anonymous.4open.science/w/EmoOmni-demopage-F790/)
 
-**Functionality:** Supports **text + image input** to generate emotion-aligned multimodal dialogue responses.
+**Functionality:** Supports **Video to Speech**.
 
 ## Quick Usage Workflow
 
