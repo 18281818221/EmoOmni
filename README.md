@@ -1,0 +1,50 @@
+# EmoOmni: Bridging Emotional Understanding and Expression in Omni-Modal LLMs
+
+This repository contains the accompanying code, including implementation code for core modules, datasets, and model scripts.
+
+## Directory Structure (Corresponding to Paper Core Modules)
+
+The repository includes **4 core directories**, each mapping to a functional module in the paper:
+
+### 1. EmoOmniEval
+* **Corresponds to:** The Model Evaluation Module of the paper.
+* **Description:** Contains all evaluation code used in the paper, including:
+    * Automatic evaluation metrics (e.g., emotion consistency score, dialogue fluency metrics).
+    * Annotation guidelines for human evaluation tasks.
+    * Result statistics scripts.
+* **Function:** Supports quantitative/qualitative analysis of multimodal outputs, enabling direct reproduction of the experimental evaluation results in the paper.
+
+### 2. EmoOmniModel
+* **Corresponds to:** The Model Training/Inference Module of the paper.
+* **Framework:** Developed based on the **Qwen2.5-Omni Swift Framework**.
+* **Note:** This directory does not include model weights (which rely on Qwen2.5-Omni base weights); it only stores launch scripts based on the framework:
+    * `train.sh`: Training script (supports parameter configurations for LoRA/full fine-tuning).
+    * `infer.sh`: Inference script (quickly calls the trained model to generate multimodal emotional dialogue responses).
+    * `requirements.txt`: Environment dependency configuration (matches the dependency versions of the Swift Framework).
+
+### 3. EmoOmniPipeline
+* **Corresponds to:** The **EmoOmniPipe** Data Pipeline of the paper.
+
+### 4. MultimodalEmotionalDialogueData
+* **Corresponds to:** The **Multimodal Emotional Dialogue Dataset** of the paper.
+* **Content:** The `.jsonl` files used when training the model.
+
+---
+
+## Demo Experience
+
+Try the system via the online demo:
+[https://anonymous.4open.science/w/EmoOmni-demopage-F790/](https://anonymous.4open.science/w/EmoOmni-demopage-F790/)
+
+**Functionality:** Supports **text + image input** to generate emotion-aligned multimodal dialogue responses.
+
+## Quick Usage Workflow
+
+1.  Obtain the preprocessed dataset from **MultimodalEmotionalDialogueData**.
+2.  Navigate to the **EmoOmniModel** directory and launch model training via the Swift Framework scripts.
+3.  Use **EmoOmniPipeline** to call the trained model for end-to-end dialogue.
+4.  Run the evaluation scripts in **EmoOmniEval** to reproduce the paper’s experimental results.
+
+## Acknowledgments
+
+Thanks to **Qwen2.5-Omni** and the **Swift** for providing model and development support.
