@@ -2,6 +2,12 @@
 
 This repository contains the accompanying code, including implementation code for core modules, datasets, and model scripts.
 
+## Demo Experience
+
+Try the system via the online demo:
+[https://anonymous.4open.science/w/EmoOmni-demopage-F790/](https://anonymous.4open.science/w/EmoOmni-demopage-F790/)
+
+
 ## Directory Structure (Corresponding to Paper Core Modules)
 
 The repository includes **4 core directories**, each mapping to a functional module in the paper:
@@ -33,10 +39,6 @@ We will open-source the dataset in huggingface soon.
 
 ---
 
-## Demo Experience
-
-Try the system via the online demo:
-[https://anonymous.4open.science/w/EmoOmni-demopage-F790/](https://anonymous.4open.science/w/EmoOmni-demopage-F790/)
 
 **Functionality:** Supports **Video to Speech**.
 
