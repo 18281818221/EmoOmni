@@ -221,7 +221,6 @@ def analyze_jsonl_entry(entry, client):
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="批量处理JSONL并多线程可视化")
-    # parser.add_argument("--jsonl", type=str, default="/mnt/bn/twj-data-multimodal/20250806-135830.jsonl", help="输入的jsonl文件路径")
     parser.add_argument("--jsonl", default='', help="输入的jsonl文件或目录路径(支持一个或多个)")
     parser.add_argument("--max-workers", type=int, default=8, help="最大线程数")
     args = parser.parse_args()

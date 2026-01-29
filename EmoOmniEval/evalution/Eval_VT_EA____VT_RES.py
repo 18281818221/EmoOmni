@@ -5,10 +5,14 @@ import base64
 from pathlib import Path
 import concurrent.futures
 from tqdm import tqdm
-
 import re
 import json
 import openai
+import json
+from openai import OpenAI
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import matplotlib.pyplot as plt
+import pandas as pd
 
 base_url = 
 api_version = 
@@ -16,6 +20,7 @@ ak =
 model_name = "gemini-2.5-pro-preview-06-05"
 max_tokens = 8192
 
+score_keys =  ["Emotion_Analysis", "Response_Emotional_Strategy", "Response_Content"]
 
 
 def extract_and_clean_json(response_content: str) -> (str | None, str | None):
@@ -51,29 +56,6 @@ def extract_and_clean_json(response_content: str) -> (str | None, str | None):
     cleaned_json_str = re.sub(r',\s*([\}\]])', r'\1', json_str)
     
     return cleaned_json_str, original_extracted_str
-
-def save_results_to_json(results, output_path):
-    """
-    将结果保存为JSON文件
-    """
-
-    # 保存结果
-    with open(output_path, "w", encoding="utf-8") as f:
-        for r in results:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
-    print(f"结果已保存到: {output_path}")
-
-
-import json
-from openai import OpenAI
-from concurrent.futures import ThreadPoolExecutor, as_completed
-import matplotlib.pyplot as plt
-import pandas as pd
-
-
-
-score_keys =  ["Emotion_Analysis", "Response_Emotional_Strategy", "Response_Content"]
-
 
 def analyze_jsonl_entry(entry, client, gt_dict_map_video_item):
 
@@ -127,13 +109,6 @@ def analyze_jsonl_entry(entry, client, gt_dict_map_video_item):
     * **1分 (合格/安全)**：情感基调大体正确，符合基本礼仪，但较为**公式化**或**平淡**。未能根据视频中的微表情或语气细微变化调整语气，属于“安全但缺乏温度”的回复。
     * **0分 (冲突/冷漠)**：情感基调与用户情绪**冲突**（如用户悲伤时模型轻浮），毫无关联的情感表现; 或面对强烈情绪信号时表现得**过度冷漠**和机械，严重破坏对话体验。
 
-    ## 维度三：回复内容相关性与逻辑 (Response_Content Relevance & Logic)
-    **目标**：评估 `<Model_Response>` 的回复文本内容是否紧扣 `<Video_Input>` 中的语义信息，以及逻辑是否通顺。
-    **评分标准 (0-2分)**：
-    * **2分 (高质量)**：回复内容紧扣上下文，逻辑严密，语义通顺。不仅回答了用户的问题或回应了话题，还根据情感分析提供了有价值的信息、建议或引导，推动对话深入。
-    * **1分 (合格)**：回复内容相关且逻辑基本通顺，能完成基本的对话任务，但内容较为平庸、通用，啰嗦;或缺乏针对性（“万金油”回复），未考虑到用户的情感状态。
-    * **0分 (不可用)**：回复内容离题，与上文没有关联度; 或者出现严重的逻辑错误、事实性错误、存在答非所问的情况; 或产生严重的幻觉。
-
     # Output Format
     请严格按照以下 JSON 格式输出评估结果，不要包含其他废话：
 
@@ -147,10 +122,6 @@ def analyze_jsonl_entry(entry, client, gt_dict_map_video_item):
             "score": <0, 1, or 2>,
             "reason": "<简短评语，解释情感策略和强度是否匹配>"
         }
-        "Response_Content": {
-            "score": <0, 1, or 2>,
-            "reason": "<简短评语，评价内容的逻辑和相关性>"
-        },
     }
 
     现在我把数据给你，请你开始分析:
@@ -205,7 +176,6 @@ def analyze_jsonl_entry(entry, client, gt_dict_map_video_item):
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="批量处理JSONL并多线程可视化")
-    # parser.add_argument("--jsonl", type=str, default="/mnt/bn/twj-data-multimodal/20250806-135830.jsonl", help="输入的jsonl文件路径")
     parser.add_argument("--jsonl", default='', help="输入的jsonl文件或目录路径(支持一个或多个)")
     parser.add_argument("--max-workers", type=int, default=32, help="最大线程数")
     args = parser.parse_args()
@@ -213,13 +183,10 @@ def main():
 
 # 支持dir，也支持单个file
     args.jsonl = [
-
-'/mnt/bn/twj-data-multimodal2/workspace/swift_training/ckpt_output/lm_output_dialogure/0112-7B-multitask-pretrained_stage1-50k_all/CH_SIMSv2_MMLA_test-for_EmoOmni-0112-7B-multitask-pretrained_stage1-50k_all-3500.jsonl'
-
 ""
     ] 
 
-    gt_jsonl = "/mnt/bn/twj-data-multimodal2/workspace/swift_training/tools/dialogue_1229/MELD_test_with_cot_sentiment_new-chunk1.1226-gpt4o-new_data-filtered_data_used_for_inference.jsonl"
+    gt_jsonl = ""
 
     back_fix = '.v0116-Gemini-Video_text-output2.jsonl'
     gt_dict_map_video_item = {}
@@ -402,7 +369,3 @@ if __name__ == "__main__":
 
     # 处理视频数据并获取结果
     
-
-
-
-# "python /mnt/bn/twj-data-multimodal/twj/workspace/deepseek_test_VideoAudio-forjsonl.py --jsonl /mnt/bn/multimodal-emo-llm-data/mlx/users/zhaozhixian.zzx/workspace/ms-swift/output-all/output-0804-full/v1-20250805-230015/checkpoint-2600/infer_result/20250806-135830.jsonl"

@@ -10,6 +10,12 @@ import re
 import json
 import openai
 
+import json
+from openai import OpenAI
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import matplotlib.pyplot as plt
+import pandas as pd
+
 
 base_url = 
 api_version = 
@@ -18,6 +24,7 @@ model_name = "gemini-2.5-pro-preview-06-05"
 max_tokens = 8192
 
 
+score_keys =  ["一致性"]
 
 def extract_and_clean_json(response_content: str) -> (str | None, str | None):
     """
@@ -53,68 +60,6 @@ def extract_and_clean_json(response_content: str) -> (str | None, str | None):
     
     return cleaned_json_str, original_extracted_str
 
-def save_results_to_json(results, output_path):
-    """
-    将结果保存为JSON文件
-    """
-
-    # 保存结果
-    with open(output_path, "w", encoding="utf-8") as f:
-        for r in results:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
-    print(f"结果已保存到: {output_path}")
-
-
-import json
-from openai import OpenAI
-from concurrent.futures import ThreadPoolExecutor, as_completed
-import matplotlib.pyplot as plt
-import pandas as pd
-
-
-
-score_keys =  ["一致性"]
-
-def reverse_data_format(input_str):
-    '''
-    string = 输入的音视频识别文本为:{utt1_text}, 情感分析结果为:{utt1_emotion} 意图策略及回复路径:{utt1_strategy} {utt1_gen_path}, 所以我的回复应该是:{utt2_text}
-
-    把这个string转化回去得到五个部分
-    
-    '''
-
-    # 如何更加鲁邦，如果没有则直接设置为none
-    try:
-        if '输入的音视频识别文本为' in input_str:
-            utt1_text = input_str.split("情感分析结果为:")[0].split("输入的音视频识别文本为:")[1].strip()
-        else:
-            utt1_text = 'None'
-        if "情感分析结果为" in input_str:
-            utt1_emotion = input_str.split("意图策略及回复路径")[0].split("情感分析结果为:")[1].strip()
-        else:
-            utt1_emotion = 'None'
-        if '回复策略分析' in input_str:
-            utt1_strategy = input_str.split("因此我的回复路径可以是")[0].split("回复策略分析:")[1].strip()
-        else:
-            utt1_strategy = 'None'
-    
-        utt2_text = input_str.split("所以我的回复应该是:")[1].strip()
-    except Exception as e:
-        return {
-            "question_text": 'None',
-            "emotion": 'None',
-            "strategy": 'None',
-            # "gen_path": utt1_gen_path,
-            "answer_text": 'None',
-        }
-
-    return {
-        "question_text": utt1_text,
-        "emotion": utt1_emotion,
-        "strategy": utt1_strategy,
-        # "gen_path": utt1_gen_path,
-        "answer_text": utt2_text,
-    }
 
 def analyze_jsonl_entry(entry, client, gt_dict_map_video_item):
 
@@ -418,9 +363,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-    # 处理视频数据并获取结果
-    
-
-
-
-# "python /mnt/bn/twj-data-multimodal/twj/workspace/deepseek_test_VideoAudio-forjsonl.py --jsonl /mnt/bn/multimodal-emo-llm-data/mlx/users/zhaozhixian.zzx/workspace/ms-swift/output-all/output-0804-full/v1-20250805-230015/checkpoint-2600/infer_result/20250806-135830.jsonl"
