@@ -5,8 +5,9 @@ This repository contains the accompanying code, including implementation code fo
 ## Demo Experience
 
 Try the system via the online demo:
-[https://anonymous.4open.science/w/EmoOmni-demopage-F790/](https://anonymous.4open.science/w/EmoOmni-demopage-F790/)
+**[https://18281818221.github.io/EmoOmni/](https://18281818221.github.io/EmoOmni/)**
 
+The demo page (`docs/index.html`) showcases 7 dialogue examples — each with the video input, the four-stage E-CoT output produced by **EmoOmni-Thinker** (*multimodal emotion analysis*, *user intent recognition*, *response strategy planning*, and *textual response content*), and the expressive speech synthesized by **EmoOmni-Talker** conditioned on the emotion instruction distilled from the response strategy.
 
 ## Directory Structure (Corresponding to Paper Core Modules)
 
