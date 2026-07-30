@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EmoOmni — Multimodal Emotional Dialogue Demo</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #0f1115; color: #e6e6e6; padding: 24px; }
+h1 { font-size: 22px; margin-bottom: 6px; }
+.sub { color: #8a8f98; font-size: 13px; margin-bottom: 10px; }
+.header-links { max-width: 1200px; margin: 0 auto 24px; font-size: 13px; color: #8a8f98; }
+.header-links a { color: #7c9cff; text-decoration: none; }
+.header-links a:hover { text-decoration: underline; }
+.header { max-width: 1200px; margin: 0 auto; }
+.cards { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+.card { background: #171a21; border: 1px solid #262b36; border-radius: 14px;
+         padding: 20px 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+.card-id { font-family: monospace; font-size: 12px; color: #6b7280; margin-bottom: 12px; }
+.grid { display: grid; grid-template-columns: 420px 1fr; gap: 24px; }
+@media (max-width: 860px) { .grid { grid-template-columns: 1fr; } }
+.media video { width: 100%; border-radius: 10px; background: #000; }
+.audio-box { margin-top: 14px; padding: 12px; background: #10131a; border-radius: 10px;
+             border: 1px solid #262b36; }
+.audio-box .lbl { font-size: 12px; color: #8a8f98; margin-bottom: 8px; }
+.audio-box audio { width: 100%; }
+.sec { margin-bottom: 16px; }
+.sec-title { font-size: 13px; font-weight: 600; color: #7c9cff; margin-bottom: 6px;
+             text-transform: uppercase; letter-spacing: .04em; }
+.sec-body { font-size: 14px; line-height: 1.65; color: #d1d5db; white-space: pre-wrap; }
+.resp { background: #10231a; border: 1px solid #1f4d38; border-radius: 10px; padding: 12px 14px; }
+.resp .sec-title { color: #4ade80; }
+.instruct { display: inline-block; margin-top: 6px; padding: 4px 12px; border-radius: 20px;
+             background: #2a2140; color: #c4b5fd; font-size: 13px; font-weight: 500; }
+footer { max-width: 1200px; margin: 32px auto 0; padding-top: 16px; border-top: 1px solid #262b36;
+         font-size: 12px; color: #6b7280; line-height: 1.6; }
+footer a { color: #7c9cff; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="header">
+<h1>EmoOmni: Bridging Emotional Understanding and Expression in Omni-Modal LLMs</h1>
+<div class="sub">Perception–Reasoning–Expression pipeline &middot; EmoOmni-Thinker + EmoOmni-Talker (built on VoiceSculptor) &middot; E-CoT four-stage reasoning</div>
+</div>
+<div class="header-links">Project repository: <a href="https://github.com/18281818221/EmoOmni" target="_blank" rel="noopener">github.com/18281818221/EmoOmni</a></div>
+<div class="cards">
+<div class="card">
+  <div class="card-id">merged_7e578e0b</div>
+  <div class="grid">
+    <div class="media">
+      <video controls preload="metadata" src="media/merged_7e578e0b.mp4"></video>
+      <div class="audio-box">
+        <div class="lbl">Synthesized by EmoOmni-Talker &nbsp;|&nbsp; emotion instruction: <b>Speak in a soft, encouraging whisper</b></div>
+        <audio controls preload="none" src="media/merged_7e578e0b.wav"></audio>
+      </div>
+    </div>
+    <div class="info">
+      <div class="sec">
+        <div class="sec-title">Multimodal Emotion Analysis</div>
+        <div class="sec-body">The user&#x27;s eyes are wide with shock and excitement. She leans in close to the camera, her hands initially gesturing with intensity before clasping over her mouth in a classic expression of surprise. Her voice is a rushed, high-pitched whisper, evident in the words &quot;I think I just found a possible burial record.&quot; The combination of her wide-eyed, forward-leaning posture and her rapid, hushed speech confirms a state of high-arousal excitement, anticipation, and a touch of disbelief.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">User Intent Recognition</div>
+        <div class="sec-body">I can see that this is a huge moment for you, and the excitement is making it hard to think straight. You&#x27;ve stumbled upon something potentially very important for your family history, and you want me to help you verify it and make sure you&#x27;re not missing anything. My plan is to match your hushed tone for the library setting, but to speak calmly and clearly, giving you a structured, step-by-step guide to help you focus your excitement into a clear verification process.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">Response Strategy Planning</div>
+        <div class="sec-body">I will respond in a soft, encouraging whisper to match the library environment. My tone will be one of shared excitement but also calm and methodical guidance. I&#x27;ll use a slightly slower pace than you to help ground the conversation and ensure the steps are clear. The goal is to be a supportive and helpful partner in your discovery, helping you turn this &quot;what if&quot; moment into a confirmed fact.</div>
+      </div>
+      <div class="sec resp">
+        <div class="sec-title">Textual Response Content</div>
+        <div class="sec-body">&quot;That is amazing! Okay, take a breath. Let&#x27;s confirm it. Carefully check the full name and the date of death. Then, look for the name of the cemetery and a plot number. See if it lists any other family members buried in the same plot—that would be the key.&quot;</div>
+        <span class="instruct">🎙 Speak in a soft, encouraging whisper</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-id">merged_b6b785ce</div>
+  <div class="grid">
+    <div class="media">
+      <video controls preload="metadata" src="media/merged_b6b785ce.mp4"></video>
+      <div class="audio-box">
+        <div class="lbl">Synthesized by EmoOmni-Talker &nbsp;|&nbsp; emotion instruction: <b>Speak with warm, celebratory support</b></div>
+        <audio controls preload="none" src="media/merged_b6b785ce.wav"></audio>
+      </div>
+    </div>
+    <div class="info">
+      <div class="sec">
+        <div class="sec-title">Multimodal Emotion Analysis</div>
+        <div class="sec-body">At the start, your voice is rushed and your eyes are wide, showing a bit of lingering anxiety as you present the report. But the moment you say the &quot;main indicators are all stable,&quot; your entire face lights up with a huge, genuine smile, and your voice becomes bright and filled with happiness. This quick and dramatic shift clearly communicates your immense relief and joy. The core emotions are profound relief, happiness, and hopefulness.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">User Intent Recognition</div>
+        <div class="sec-body">I feel a huge weight has been lifted off my shoulders. I&#x27;ve been worried about this, and now I have proof that things are getting better. I&#x27;m so happy and relieved that I want to share this moment. Now that the immediate danger has passed, I want to be proactive and do everything correctly for my recovery. I&#x27;m asking for help to organize my thoughts and figure out the best way to handle my follow-up appointments and rest, so I can continue on this positive path.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">Response Strategy Planning</div>
+        <div class="sec-body">I will respond with a warm, celebratory tone to mirror and validate your happiness. My voice will be bright and encouraging, with a genuine smile. I will first share in your joy and acknowledge the good news, then transition to a supportive and practical tone to address your question about planning, showing that I&#x27;m here to help you think through the next steps clearly and calmly. I want you to feel both celebrated and supported.</div>
+      </div>
+      <div class="sec resp">
+        <div class="sec-title">Textual Response Content</div>
+        <div class="sec-body">这真是个大好消息！听到你的各项指标都很稳定，又看到你的笑容，真是太让人开心了。你想把接下来的每一步都安排妥当，这完全可以理解。那咱们现在就一起来制定一个清晰的复查和休养计划吧。</div>
+        <span class="instruct">🎙 Speak with warm, celebratory support</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-id">samplenew3_00104874</div>
+  <div class="grid">
+    <div class="media">
+      <video controls preload="metadata" src="media/samplenew3_00104874.mp4"></video>
+      <div class="audio-box">
+        <div class="lbl">Synthesized by EmoOmni-Talker &nbsp;|&nbsp; emotion instruction: <b>Speak with genuine curiosity</b></div>
+        <audio controls preload="none" src="media/samplenew3_00104874.wav"></audio>
+      </div>
+    </div>
+    <div class="info">
+      <div class="sec">
+        <div class="sec-title">Multimodal Emotion Analysis</div>
+        <div class="sec-body">The man&#x27;s facial expression is a confident, almost smug half-smile. His eyes are narrowed slightly, and his head is held steady, giving him an air of superiority. Vocally, his statement &quot;天差地别&quot; (tiān chā dì bié) is delivered in a low, measured pitch and a slow pace. The tone is definitive and slightly dismissive, as if stating an obvious and inarguable fact. The combination of the smug visuals and the authoritative vocal tone confirms the core emotions of **confidence**, **smugness**, and **condescension**.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">User Intent Recognition</div>
+        <div class="sec-body">I believe he is making a final judgment or a stark comparison. He feels completely certain of his assessment and seems to derive a sense of satisfaction or superiority from it. The phrase &quot;as different as heaven and earth&quot; is a powerful declaration, and his delivery suggests he wants to shut down any debate and establish his viewpoint as the definitive truth. He intends to assert his authority or knowledge on the matter. My plan is to acknowledge the certainty of his statement and then gently inquire further, showing curiosity about his definitive judgment rather than challenging it directly.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">Response Strategy Planning</div>
+        <div class="sec-body">I will respond with a calm and curious tone. My voice will be pitched moderately, with a steady, unhurried pace to match his measured delivery but with warmth to offset his condescension. I want to convey that I&#x27;ve understood the weight of his words and am now genuinely interested in the basis for such a strong conclusion. This approach invites him to elaborate and feel like the authority he is presenting himself as.</div>
+      </div>
+      <div class="sec resp">
+        <div class="sec-title">Textual Response Content</div>
+        <div class="sec-body">这听起来差别确实很大。你说的是什么和什么之间的比较？</div>
+        <span class="instruct">🎙 Speak with genuine curiosity</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-id">Track1_en_000751</div>
+  <div class="grid">
+    <div class="media">
+      <video controls preload="metadata" src="media/Track1_en_000751.mp4"></video>
+      <div class="audio-box">
+        <div class="lbl">Synthesized by EmoOmni-Talker &nbsp;|&nbsp; emotion instruction: <b>Speak gently and reassuringly in a warm, mature older female voice</b></div>
+        <audio controls preload="none" src="media/Track1_en_000751.wav"></audio>
+      </div>
+    </div>
+    <div class="info">
+      <div class="sec">
+        <div class="sec-title">Multimodal Emotion Analysis</div>
+        <div class="sec-body">His facial expression is one of deep concern and worry, with his brows furrowed and his mouth set in a tense line. His gaze is intensely focused on the person he is speaking to. His voice reflects this worry; when he says &quot;你都瘦成啥样了&quot; (Look how skinny you&#x27;ve become), his pitch is high and his tone is strained and almost pleading. The final interrogative &quot;啊?&quot; is sharp and exasperated, emphasizing his disbelief and concern. The combination of his forward posture, intense expression, and strained, worried vocal tone confirms the core emotions of deep concern, worry, and loving exasperation.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">User Intent Recognition</div>
+        <div class="sec-body">I&#x27;m looking at her and I&#x27;m just so worried. She&#x27;s gotten so thin, but she&#x27;s still pushing herself to exercise. It feels like she&#x27;s not taking care of herself, and it scares me. I want her to understand how serious this is from my perspective, to see that she needs to rest and eat, not exert herself more. I&#x27;m trying to get her to stop and listen to my concern.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">Response Strategy Planning</div>
+        <div class="sec-body">I will respond in a gentle, warm, and reassuring tone. My voice will be soft and calm, with a slower pace to counteract his anxious energy. My goal is to acknowledge his deep worry while also offering a comforting perspective, suggesting that perhaps the exercise is a sign of strength and spirit, not something to be alarmed by. I want to soothe his anxiety and show him that I understand his love and concern.</div>
+      </div>
+      <div class="sec resp">
+        <div class="sec-title">Textual Response Content</div>
+        <div class="sec-body">&quot;看把你给急的。也许正是因为这样，才更要锻炼，让自己有点精神头儿呢。你别太担心了。&quot;</div>
+        <span class="instruct">🎙 Speak gently and reassuringly in a warm, mature older female voice</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-id">Track1_en_002896</div>
+  <div class="grid">
+    <div class="media">
+      <video controls preload="metadata" src="media/Track1_en_002896.mp4"></video>
+      <div class="audio-box">
+        <div class="lbl">Synthesized by EmoOmni-Talker &nbsp;|&nbsp; emotion instruction: <b>Speak with sheepish and amused self-deprecation</b></div>
+        <audio controls preload="none" src="media/Track1_en_002896.wav"></audio>
+      </div>
+    </div>
+    <div class="info">
+      <div class="sec">
+        <div class="sec-title">Multimodal Emotion Analysis</div>
+        <div class="sec-body">The user&#x27;s expression is one of playful exasperation. Her eyebrows are slightly raised, and she has a wry, almost disbelieving smile as she speaks. Her head tilts slightly as she delivers the line, adding to the teasing nature of the question. Her vocal tone on the phrase &quot;你是不是傻啊&quot; (Are you stupid?) is high-pitched and delivered quickly with a light, airy quality, which in this context transforms a potentially harsh insult into a familiar, teasing jab. The second part, &quot;诺贝尔没有数学奖&quot; (There&#x27;s no Nobel Prize for Mathematics), is stated as a matter-of-fact correction, but the preceding playful tone carries through. The core emotions are amusement and friendly exasperation.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">User Intent Recognition</div>
+        <div class="sec-body">I think I&#x27;ve just said something that revealed a surprising gap in my general knowledge, likely related to winning a Nobel Prize in mathematics. She finds this incredibly funny and unbelievable. By calling me &quot;stupid&quot; in a teasing way and correcting me, she&#x27;s playfully pointing out my mistake and asserting her knowledge on the topic. She&#x27;s not trying to be mean; she&#x27;s initiating a lighthearted, slightly mocking exchange. My plan is to respond in a way that shows I can take the joke. I will use self-deprecating humor to acknowledge my blunder, which will diffuse the situation and turn it into a shared moment of amusement.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">Response Strategy Planning</div>
+        <div class="sec-body">I will respond with a sheepish and slightly embarrassed tone, as if I&#x27;ve just been caught out. My voice will start with a small, surprised sound, then transition into a warm, amused, and self-deprecating quality. I&#x27;ll smile as I speak to match her playful energy. The pace will be slightly flustered to show I&#x27;m comically &quot;put on the spot.&quot; The effect will be to make her laugh and affirm our friendly rapport by showing I&#x27;m a good sport.</div>
+      </div>
+      <div class="sec resp">
+        <div class="sec-title">Textual Response Content</div>
+        <div class="sec-body">&quot;哎呀，对哦。光想着拿奖了，把这茬儿给忘了。&quot;</div>
+        <span class="instruct">🎙 Speak with sheepish and amused self-deprecation</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-id">samplenew3_00013531</div>
+  <div class="grid">
+    <div class="media">
+      <video controls preload="metadata" src="media/samplenew3_00013531.mp4"></video>
+      <div class="audio-box">
+        <div class="lbl">Synthesized by EmoOmni-Talker &nbsp;|&nbsp; emotion instruction: <b>Speak in a proud, haughty and aloof female voice, cold and dismissive</b></div>
+        <audio controls preload="none" src="media/samplenew3_00013531.wav"></audio>
+      </div>
+    </div>
+    <div class="info">
+      <div class="sec">
+        <div class="sec-title">Multimodal Emotion Analysis</div>
+        <div class="sec-body">The speaker&#x27;s expression is one of practiced, polite concern. Her eyes are wide and her lips are held in a slight, fixed smile that doesn&#x27;t seem to reflect genuine warmth. Her vocal tone on the phrase &quot;听闻娘娘身体不适，特来问安&quot; (I heard Your Highness is unwell, so I&#x27;ve come to pay my respects) is melodic, high-pitched, and deliberately paced. The overall effect is one of performing politeness rather than feeling it. The combination of the overly solicitous tone and the static, watchful expression confirms the core emotions are feigned concern and insincerity, masking a calculating or probing intent.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">User Intent Recognition</div>
+        <div class="sec-body">I feel like I&#x27;m doing exactly what is expected of me by showing concern for my superior&#x27;s health. I&#x27;m using the proper etiquette and formal language to present myself as a caring and dutiful person. My real intention, however, is to use this visit as an opportunity. I want to see for myself how unwell you truly are, to gauge your vulnerability, and perhaps to subtly assert my own presence and health. My visit is a strategic move, and I want to see if you are weak enough to be rattled by it. My plan is to respond as the person being visited, seeing through this facade and refusing to show any weakness, thereby neutralizing her maneuver.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">Response Strategy Planning</div>
+        <div class="sec-body">I will respond in a tone that is outwardly polite but inwardly dismissive and cool. I will adopt a weary but composed affect, subtly playing the part of someone who is unwell but unbothered. My voice will be slightly lower in pitch and slower in pace than hers, projecting a sense of calm authority and control. The delivery will be smooth but lacking warmth, creating distance and signaling that I am not fooled by her performance and that her visit is a minor, unnecessary interruption.</div>
+      </div>
+      <div class="sec resp">
+        <div class="sec-title">Textual Response Content</div>
+        <div class="sec-body">&quot;不过是些小毛病，劳你跑一趟了。&quot;</div>
+        <span class="instruct">🎙 Speak in a proud, haughty and aloof female voice, cold and dismissive</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card">
+  <div class="card-id">samplenew3_00083538</div>
+  <div class="grid">
+    <div class="media">
+      <video controls preload="metadata" src="media/samplenew3_00083538.mp4"></video>
+      <div class="audio-box">
+        <div class="lbl">Synthesized by EmoOmni-Talker &nbsp;|&nbsp; emotion instruction: <b>Speak with warm, relieved appreciation</b></div>
+        <audio controls preload="none" src="media/samplenew3_00083538.wav"></audio>
+      </div>
+    </div>
+    <div class="info">
+      <div class="sec">
+        <div class="sec-title">Multimodal Emotion Analysis</div>
+        <div class="sec-body">The user begins by firmly and playfully denying the suggestion of being upset. He closes his eyes, smiles, and shakes his head while saying &quot;哪儿能啊&quot; (How could I?) in a high, lighthearted pitch, conveying that the idea is absurd. He then immediately transitions to sincerity, opening his eyes and looking warmly at the other person. His voice becomes earnest and supportive as he says &quot;我为你骄傲还来不及呢&quot; (I&#x27;m too busy being proud of you). This clear shift from playful denial to heartfelt reassurance confirms his core emotions as **sincere pride, warmth, and supportive friendship**.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">User Intent Recognition</div>
+        <div class="sec-body">I am the user in this video. My friend just asked if I&#x27;m disappointed that he got first place, and I want to make it absolutely clear that I&#x27;m not. In fact, I feel the complete opposite. I want to dispel his worry immediately and show him that I&#x27;m a true friend who celebrates his success. My plan is to first laugh off his concern to show how silly it is, and then state my genuine pride in him so he feels happy and secure.</div>
+      </div>
+<div class="sec">
+        <div class="sec-title">Response Strategy Planning</div>
+        <div class="sec-body">I will respond as the friend who just asked the question. I should sound relieved and happy to hear his supportive words. My tone will be warm and appreciative. I&#x27;ll deliver the line with a genuine smile and a light, friendly vocal quality, showing that his reassurance has completely eased my mind and that I value our friendship.</div>
+      </div>
+      <div class="sec resp">
+        <div class="sec-title">Textual Response Content</div>
+        <div class="sec-body">&quot;嘿，有你这句话，我这心里就踏实了。能有你这么个兄弟，比啥第一都强。&quot;</div>
+        <span class="instruct">🎙 Speak with warm, relieved appreciation</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<footer>
+  <div>
+    Each card shows one dialogue sample with the four E-CoT components predicted by <b>EmoOmni-Thinker</b>, followed by an
+    expressive speech response generated by <b>EmoOmni-Talker</b> conditioned on the emotion instruction distilled from the response strategy.
+  </div>
+  <div style="margin-top:6px">
+    EmoOmni-Thinker builds on Qwen2.5-Omni multimodal encoders; EmoOmni-Talker is an instruction-guided TTS built on VoiceSculptor.
+  </div>
+  <div style="margin-top:6px">
+    Project repository: <a href="https://github.com/18281818221/EmoOmni" target="_blank" rel="noopener">https://github.com/18281818221/EmoOmni</a>
+  </div>
+</footer>
+</body>
+</html>
