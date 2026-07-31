@@ -104,7 +104,7 @@ The repository includes **4 core directories**, each mapping to a functional mod
 ### 2. `EmoOmniPipeline/` — Data Pipeline (EmoOmniPipe)
 * **Corresponds to:** the **EmoOmniPipe** data pipeline (Figure 2).
 * **Stage 1** — `Stage1_BigASR_API/`, `Stage1_Denoise_MelBanRoformer/`: raw audio denoising and ASR-based segmentation.
-* **Stage 2** — `Stage2_Anootation/`: multimodal annotation via SABER-LLM (Swift-based inference).
+* **Stage 2** — `Stage2_Anootation/`: multimodal annotation via [SABER-LLM](https://github.com/zxzhao0/SABER-LLM) (Swift-based inference).
 * **Stage 3** — `Stage3_Dialogue/`: E-CoT construction (`E-CoT.py`), instruction distillation (`Ecot_to_Instruction.py`),
   dialogue-level semantic (`Dialogue_Semantic_filter.py`) and toxicity (`Dialogue_toxic_filter.py`) filtering.
 
