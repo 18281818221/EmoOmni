@@ -1,5 +1,5 @@
 <h1 align="center">EmoOmni</h1>
-<p align="center"><b>EmoOmni: Bridging Emotional Understanding and Expressive Speech in <br/>in Omni-Modal LLMs</b></p>
+<p align="center"><b>EmoOmni: Bridging Emotional Understanding and Expressive Speech Generation<br/>in Omni-Modal LLMs</b></p>
 
 <p align="center">
   <a href="https://18281818221.github.io/EmoOmni/"><img alt="Demo" src="https://img.shields.io/badge/🎧%20Demo-EmoOmni-blueviolet"></a>
